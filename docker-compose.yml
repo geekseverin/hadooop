@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  # MongoDB pour l'ingestion de données
+  mongodb:
+    build: ./dockerfiles/mongodb
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/data/csv
+    networks:
+      - bigdata-network
+
+  # Hadoop Master (NameNode + ResourceManager)
+  hadoop-master:
+    build: ./dockerfiles/hadoop-master
+    container_name: hadoop-master
+    hostname: hadoop-master
+    ports:
+      - "9870:9870"    # NameNode Web UI
+      - "8088:8088"    # ResourceManager Web UI
+      - "19888:19888"  # JobHistory Server
+      - "8080:8080"    # Spark Master Web UI
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./config/spark:/opt/spark/conf
+      - ./scripts:/scripts
+      - ./data:/data
+    environment:
+      - CLUSTER_NAME=bigdata-cluster
+    networks:
+      - bigdata-network
+
+  # Hadoop Secondary NameNode
+  hadoop-secondary:
+    build: ./dockerfiles/hadoop-worker
+    container_name: hadoop-secondary
+    hostname: hadoop-secondary
+    ports:
+      - "9868:9868"    # Secondary NameNode Web UI
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./scripts:/scripts
+      - ./data:/data
+    environment:
+      - SERVICE_TYPE=secondary
+    depends_on:
+      - hadoop-master
+    networks:
+      - bigdata-network
+
+  # Hadoop Worker 1
+  hadoop-worker1:
+    build: ./dockerfiles/hadoop-worker
+    container_name: hadoop-worker1
+    hostname: hadoop-worker1
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./scripts:/scripts
+      - ./data:/data
+    environment:
+      - SERVICE_TYPE=worker
+    depends_on:
+      - hadoop-master
+    networks:
+      - bigdata-network
+
+  # Hadoop Worker 2
+  hadoop-worker2:
+    build: ./dockerfiles/hadoop-worker
+    container_name: hadoop-worker2
+    hostname: hadoop-worker2
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./scripts:/scripts
+      - ./data:/data
+    environment:
+      - SERVICE_TYPE=worker
+    depends_on:
+      - hadoop-master
+    networks:
+      - bigdata-network
+
+  # Hadoop Worker 3
+  hadoop-worker3:
+    build: ./dockerfiles/hadoop-worker
+    container_name: hadoop-worker3
+    hostname: hadoop-worker3
+    volumes:
+      - ./config/hadoop:/opt/hadoop/etc/hadoop
+      - ./scripts:/scripts
+      - ./data:/data
+    environment:
+      - SERVICE_TYPE=worker
+    depends_on:
+      - hadoop-master
+    networks:
+      - bigdata-network
+
+  # Application Web de Visualisation
+  webapp:
+    build: ./app
+    container_name: webapp
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - hadoop-master
+      - mongodb
+    networks:
+      - bigdata-network
+
+networks:
+  bigdata-network:
+    driver: bridge

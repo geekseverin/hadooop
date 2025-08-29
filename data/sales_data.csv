@@ -1,0 +1,11 @@
+product_id,product_name,category,price,quantity,sales_date,region
+1,Laptop,Electronics,1200,5,2024-01-15,Europe
+2,Smartphone,Electronics,800,10,2024-01-16,Asia
+3,Tablet,Electronics,600,8,2024-01-17,America
+4,Headphones,Electronics,150,20,2024-01-18,Europe
+5,Keyboard,Electronics,80,15,2024-01-19,Asia
+6,Mouse,Electronics,40,25,2024-01-20,America
+7,Monitor,Electronics,300,12,2024-01-21,Europe
+8,Printer,Electronics,250,6,2024-01-22,Asia
+9,Camera,Electronics,900,4,2024-01-23,America
+10,Speaker,Electronics,120,18,2024-01-24,Europe

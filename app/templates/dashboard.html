@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Analyse Big Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>📊 Dashboard d'Analyse</h1>
+        <nav>
+            <a href="/">← Retour Accueil</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="dashboard-section">
+                <h2>Analyse des Employés par Ville</h2>
+                <div id="city-analysis" class="chart-container">
+                    <div class="loading">Chargement des données...</div>
+                </div>
+                <div id="city-table" class="data-table"></div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Analyse des Ventes par Région</h2>
+                <div id="sales-analysis" class="chart-container">
+                    <div class="loading">Chargement des données...</div>
+                </div>
+                <div id="sales-table" class="data-table"></div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Top 10 des Produits</h2>
+                <div id="top-products" class="chart-container">
+                    <div class="loading">Chargement des données...</div>
+                </div>
+                <div id="products-table" class="data-table"></div>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Données MongoDB</h2>
+                <div id="mongodb-analysis" class="chart-container">
+                    <div class="loading">Chargement des données...</div>
+                </div>
+                <div id="mongodb-table" class="data-table"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Big Data - UCAO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🚀 Projet Big Data - Traitement Distribué</h1>
+        <p>Master 1 UCAO | Année 2024-2025</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="welcome-section">
+                <h2>Bienvenue dans l'environnement Big Data</h2>
+                <p>Ce projet démontre l'utilisation complète d'un écosystème de traitement distribué avec :</p>
+                
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h3>🐘 Hadoop</h3>
+                        <p>Stockage distribué HDFS et traitement MapReduce</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>⚡ Spark</h3>
+                        <p>Traitement rapide en mémoire</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>🐷 Pig</h3>
+                        <p>Analyse exploratoire de données</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>🍃 MongoDB</h3>
+                        <p>Base de données NoSQL pour l'ingestion</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <h2>Architecture du Cluster</h2>
+                <div class="cluster-info">
+                    <div class="node-info">
+                        <h4>Master Node</h4>
+                        <ul>
+                            <li>NameNode (HDFS)</li>
+                            <li>ResourceManager (YARN)</li>
+                            <li>Spark Master</li>
+                        </ul>
+                    </div>
+                    <div class="node-info">
+                        <h4>Secondary Master</h4>
+                        <ul>
+                            <li>Secondary NameNode</li>
+                            <li>Backup & Checkpointing</li>
+                        </ul>
+                    </div>
+                    <div class="node-info">
+                        <h4>Worker Nodes (3)</h4>
+                        <ul>
+                            <li>DataNodes</li>
+                            <li>NodeManagers</li>
+                            <li>Spark Workers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dashboard-link">
+                    <a href="/dashboard" class="btn-primary">
+                        📊 Voir le Dashboard d'Analyse
+                    </a>
+                </div>
+            </div>
+
+            <div class="status-section">
+                <h2>Status des Services</h2>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <h4>Hadoop HDFS</h4>
+                        <a href="http://localhost:9870" target="_blank">Interface Web NameNode</a>
+                    </div>
+                    <div class="status-card">
+                        <h4>YARN ResourceManager</h4>
+                        <a href="http://localhost:8088" target="_blank">Interface Web YARN</a>
+                    </div>
+                    <div class="status-card">
+                        <h4>Spark Master</h4>
+                        <a href="http://localhost:8080" target="_blank">Interface Web Spark</a>
+                    </div>
+                    <div class="status-card">
+                        <h4>JobHistory Server</h4>
+                        <a href="http://localhost:19888" target="_blank">Historique des Jobs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 UCAO - Projet Traitement Distribué</p>
+    </footer>
+</body>
+</html>
